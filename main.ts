@@ -2,7 +2,7 @@
 // make.fun one-line comedy bounty (u-clever-harbor-75-fortune-cookie-for-the-liquidated-38fd239c)
 // main.ts: writes a single fortune cookie line to /output/entry.txt (or $MAKEFUN_OUTPUT_DIR/entry.txt).
 // Node 22, standard library only, no network, fully deterministic.
-// Verified: final line is 101 characters, 1 line, 18 words, pure ASCII.
+// Verified: final line is 70 characters, 1 line, 13 words, pure ASCII.
 //
 // Candidate rounds (judge brief: fortune voice + loss/trader in it first,
 // then laugh, then one breath, then freshness, then oracular phrasing):
@@ -27,13 +27,11 @@
 //   back a cookie and a bill for the lesson."
 //   20 words. Strong fortune voice ("asked the stars"), explicit "liquidated
 //   trader", but "a bill for the lesson" scolds; the punchline charges him.
-// Round 6 (FINAL) - "A liquidated trader asked the stars for luck; the stars
-//   replied with this cookie and kept the change."
-//   18 words, 101 chars. Keeps round 5's oracular frame and explicit
-//   "liquidated trader", swaps the scolding bill for "kept the change": the
-//   stars kept his money, and all he got back was the cookie in his hand.
-//   The joke lands on the loss, stays rueful and warm, and the last two
-//   words are the surprise.
+// Round 6 (FINAL, patched per Quick Smart review) - "Great fortune was
+//   in your future, but you borrowed against it at 100x."
+//   13 words, 70 chars. Replaces the stars/kept-the-change line: the joke
+//   lands on leverage itself — the fortune was real, the trader borrowed
+//   against it at 100x and lost it. Shorter, punchier, one breath.
 
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -44,11 +42,11 @@ const CANDIDATES: string[] = [
   "Good fortune is coming: your wallet is empty, so the only way left is up, unless you open leverage again.",
   "Your fortune: the market has eaten your money, but it left you the crumbs, and crumbs make excellent cookies.",
   "A liquidated trader asked the stars for luck; the stars sent back a cookie and a bill for the lesson.",
-  "A liquidated trader asked the stars for luck; the stars replied with this cookie and kept the change.",
+  "Great fortune was in your future, but you borrowed against it at 100x.",
 ];
 
-// Round 6 wins: oracular frame, explicit liquidated trader, warm rueful joke,
-// surprising last words ("kept the change").
+// Round 6 wins (patched per Quick Smart review): the fortune was real,
+// the trader borrowed against it at 100x — leverage is the punchline.
 const FINAL_INDEX = 5;
 const entry = CANDIDATES[FINAL_INDEX];
 
